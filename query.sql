@@ -32,18 +32,16 @@ create table attore(
 		idFilm int,
         idAttore int,
         FOREIGN KEY (idFIlm) REFERENCES film(id),
-        FOREIGN KEY (idAttore) REFERENCES attore(id));
+        FOREIGN KEY (idAttore) REFERENCES attore(id),
+        protagonista boolean);
+
+
 
 
 
 
 insert into film(titolo,durata,genere) values("Mission Impossibile",140,"Azione");
-insert into film(titolo,durata,genere) values("Mission Impossibile",135,"Azione");
-insert into film(titolo,durata,genere) values("Star Trek",110,"Fantascienza");
-insert into film(titolo,durata,genere) values("Will Hunting",120,"Drammatico");
-
-insert into film(titolo,durata,genere) values("Mission Impossibile",140,"Azione");
-insert into film(titolo,durata,genere) values("Mission Impossibile",135,"Azione");
+insert into film(titolo,durata,genere) values("Mission Impossibile 2",135,"Azione");
 insert into film(titolo,durata,genere) values("Star Trek",110,"Fantascienza");
 insert into film(titolo,durata,genere) values("Will Hunting",120,"Drammatico");
 
@@ -56,17 +54,25 @@ insert into attore(nome,cognome) values("Chris","Pine"); /* Star trek */
 insert into attore(nome,cognome) values("Matt","Damon"); /* Will hunting */
 insert into attore(nome,cognome) values("Tom","Cruise"); /* Mission Impossible */
 
+insert into direzione(idRegista,idFIlm) values (1,3); /* 1 -Star trek */
+insert into direzione(idRegista,idFIlm) values (2,4);  /* 2 - Will hunting */
+insert into direzione(idRegista,idFIlm) values (3,1); /* 3 - Mission Impossible */
+insert into direzione(idRegista,idFIlm) values (3,2); /* 4 -Mission impossible */
 
-alter table attore drop column  protagonista ;
-alter table interpretazione add protagonista boolean;
+insert into interpretazione(idFilm,idAttore,protagonista) values (3,1,true); /* 1 -Star trek */
+insert into interpretazione(idFilm,idAttore,protagonista) values (4,2,true);  /* 2 - Will hunting */
+insert into interpretazione(idFilm,idAttore,protagonista) values (1,3,true); /* 3 - Mission Impossible */
+insert into interpretazione(idFIlm,idAttore,protagonista) values (2,3,true); /* 4 -Mission impossible */
 
-insert into direzione(idRegista,idFIlm) values (1,0);
-insert into direzione(idRegista,idFIlm) values (2,0);
-insert into direzione(idRegista,idFIlm) values (3,0);
-insert into direzione(idRegista,idFIlm) values (4,0);
+
+
+select regista.nome, regista.cognome  from regista inner join direzione on regista.id=direzione.idRegista where regista.nome = "Gus van";
+
 
 select * from film;
+select * from regista;
+select * from attore;
 
+select * from direzione;
 
-
-
+select * from interpretazione;
