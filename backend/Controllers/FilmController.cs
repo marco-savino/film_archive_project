@@ -6,6 +6,7 @@ using backend.Models;
 
 namespace backend.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class FilmController : ControllerBase
@@ -60,6 +61,23 @@ namespace backend.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = "server=localhost;database=archivio_film;uid=localUser;pwd=localUser";
+            try{
+                connection.Open();
+                Console.WriteLine("Connessione eseguita");
+
+                MySqlCommand cmd = connection.CreateCommand();
+                cmd.CommandText = "INSERT INTO film(titolo, genere, durata) VALUES(\"Jurassic Park\", \"Avventura\", \"120\")";
+                MySqlDataReader reader = cmd.ExecuteReader();
+            }catch(Exception e){
+                Console.WriteLine("Eccezione!\n "+ e.Message);
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                    connection.Close();
+            }
         }
 
         // PUT api/<FilmController>/5
