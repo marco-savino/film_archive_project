@@ -25,5 +25,12 @@ namespace backend.Services
 
             return filmListString; 
         }
+
+        public void postFilm(string filmString)
+        {
+            Film film = JsonSerializer.Deserialize<Film>(filmString);
+            ctx.Films.Add(film);
+            ctx.SaveChanges();
+        }
     }
 }

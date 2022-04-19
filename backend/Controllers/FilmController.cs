@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using backend.Models;
 using backend.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -32,10 +31,7 @@ namespace backend.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = "server=localhost;database=archivio_film;uid=localUser;pwd=localUser";
-
-            
+            filmService.postFilm(value);
         }
 
         // PUT api/<FilmController>/5
