@@ -26,6 +26,11 @@ namespace backend.Services
             return filmListString; 
         }
 
+        public string getFilmById(int id)
+        {
+            return JsonSerializer.Serialize(ctx.Films.ToList().Where(filmToGet => filmToGet.Id == id));
+        }
+
         public void postFilm(string filmString)
         {
             Film film = JsonSerializer.Deserialize<Film>(filmString);

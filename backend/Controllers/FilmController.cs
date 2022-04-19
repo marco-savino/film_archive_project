@@ -24,7 +24,7 @@ namespace backend.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return filmService.getFilmById(id);
         }
 
         // POST api/<FilmController>
